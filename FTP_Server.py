@@ -1,8 +1,19 @@
-# FILE TRANSFER SERVER
+####################
+#
+#    File Transfer Protocol Server
+#    CPS375 Project
+#
+#    Michael Aboff
+#    mwaboff (at) gmail.com
+#
+####################
 
 import socket, os
 
 def sendFile(s, filename):
+    '''
+    Sends file "filename" to client.
+    '''
     if fileExist(s, filename):
         filehandle = open(filename,'r')
         file_read = filehandle.read()
@@ -12,6 +23,9 @@ def sendFile(s, filename):
         s.send(msg)
 
 def fileExist(s, filename):
+    '''
+    Determines if file exists, if so return True, else tell client of invalid path
+    '''
     if not os.path.exists(filename):
         s.send("ERROR %s is an invalid path" % filename)
         print("-ERROR- File Requested Does Not Exist: %s" % filename)
@@ -24,10 +38,12 @@ def main():
     HOST = ''
     PORT = 9998
 
+    # Create Socket.
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((HOST, PORT))
     s.listen(10)
     
+    # Loop forever, checking for incoming connections. 
     while True:
         conn, addr = s.accept()
         while True:

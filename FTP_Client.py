@@ -1,4 +1,12 @@
-# FILE TRANSFER CLIENT
+####################
+#
+#    File Transfer Protocol Client
+#    CPS375 Project
+#
+#    Michael Aboff
+#    mwaboff (at) gmail.com
+#
+####################
 
 import socket
 
